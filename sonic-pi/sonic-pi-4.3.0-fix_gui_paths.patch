@@ -1,0 +1,31 @@
+diff --git a/app/api/src/sonicpi_api.cpp b/app/api/src/sonicpi_api.cpp
+index c6a6f03ae..2b0c5b1bc 100644
+--- a/app/api/src/sonicpi_api.cpp
++++ b/app/api/src/sonicpi_api.cpp
+@@ -750,9 +750,9 @@ bool SonicPiAPI::InitializePaths(const fs::path& root)
+     }
+ 
+     // Set Ruby script paths
+-    m_paths[SonicPiPath::BootDaemonPath]      = m_paths[SonicPiPath::RootPath] / "app/server/ruby/bin/daemon.rb";
+-    m_paths[SonicPiPath::FetchUrlPath]        = m_paths[SonicPiPath::RootPath] / "app/server/ruby/bin/fetch-url.rb";
+-    m_paths[SonicPiPath::ClearLogsPath]        = m_paths[SonicPiPath::RootPath] / "app/server/ruby/bin/clear-logs.rb";
++    m_paths[SonicPiPath::BootDaemonPath]      = "/usr/lib/sonic-pi/app/server/ruby/bin/daemon.rb";
++    m_paths[SonicPiPath::FetchUrlPath]        = "/usr/lib/sonic-pi/app/server/ruby/bin/fetch-url.rb";
++    m_paths[SonicPiPath::ClearLogsPath]        = "/usr/lib/sonic-pi/app/server/ruby/bin/clear-logs.rb";
+ 
+ 
+ 
+diff --git a/app/gui/qt/mainwindow.cpp b/app/gui/qt/mainwindow.cpp
+index 1953da32d..4d5dd46ae 100644
+--- a/app/gui/qt/mainwindow.cpp
++++ b/app/gui/qt/mainwindow.cpp
+@@ -1230,8 +1230,7 @@ QString MainWindow::rootPath()
+     // We should pass this to the build instead of wiring it up this way!
+     return QCoreApplication::applicationDirPath() + "/../../../../..";
+ #else
+-    // On linux, CMake builds app into the build folder
+-    return QCoreApplication::applicationDirPath() + "/../../../..";
++    return "/usr/share/sonic-pi";
+ #endif
+ }
+ 

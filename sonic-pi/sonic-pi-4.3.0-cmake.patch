@@ -1,0 +1,13 @@
+diff --git a/app/linux-config.sh b/app/linux-config.sh
+index cac0d43b6..e2f7d2197 100755
+--- a/app/linux-config.sh
++++ b/app/linux-config.sh
+@@ -51,7 +51,7 @@ option() {
+   fi
+ }
+ 
+-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE="$config" -DBUILD_IMGUI_INTERFACE="$(option "!$no_imgui")" -DUSE_SYSTEM_LIBS="$(option "$system_libs")" ..
++cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_SKIP_INSTALL_RPATH=YES -DCMAKE_BUILD_TYPE="$config" -DBUILD_IMGUI_INTERFACE="$(option "!$no_imgui")" -DUSE_SYSTEM_LIBS="$(option "$system_libs")" ..
+ 
+ cd "${SCRIPT_DIR}"
+ 

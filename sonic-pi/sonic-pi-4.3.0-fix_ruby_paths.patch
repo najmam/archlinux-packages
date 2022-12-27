@@ -1,0 +1,49 @@
+diff --git a/app/server/ruby/core.rb b/app/server/ruby/core.rb
+index a5e433d78..2ad5098ec 100755
+--- a/app/server/ruby/core.rb
++++ b/app/server/ruby/core.rb
+@@ -125,7 +125,7 @@ module SonicPi
+       # define this helper first so we can set the constants below
+       def self.wav_from_buffer_file(filename)
+         ::WaveFile::Reader.new(
+-          File.expand_path("../../../../etc/buffers/#{filename}", __FILE__),
++          File.expand_path("/usr/share/sonic-pi/buffers/#{filename}", __FILE__),
+           ::WaveFile::Format.new(:mono, :float, 44100)
+         ).read(441000).samples.freeze
+       end
+diff --git a/app/server/ruby/paths.rb b/app/server/ruby/paths.rb
+index 519f2c0c4..049ae1743 100644
+--- a/app/server/ruby/paths.rb
++++ b/app/server/ruby/paths.rb
+@@ -47,11 +47,11 @@ module SonicPi
+     end
+ 
+     def self.root_path
+-      File.absolute_path("#{File.dirname(__FILE__)}/../../../")
++      File.absolute_path("#{File.dirname(__FILE__)}/../../../") # arch: resolves to /usr/lib/sonic-pi
+     end
+ 
+     def self.etc_path
+-      File.absolute_path("#{root_path}/etc")
++      File.absolute_path("/usr/share/sonic-pi")
+     end
+ 
+     def self.snippets_path
+@@ -147,7 +147,7 @@ module SonicPi
+       when :windows
+         File.absolute_path("#{native_path}/aubio_onset.exe")
+       else
+-        File.absolute_path("#{native_path}/aubio_onset")
++        File.absolute_path("/usr/bin/aubioonset")
+       end
+     end
+ 
+@@ -156,7 +156,7 @@ module SonicPi
+       when :windows
+         File.absolute_path("#{native_path}/sox/sox.exe")
+       else
+-        File.absolute_path("#{native_path}/sox/sox")
++        File.absolute_path("/usr/bin/sox")
+       end
+     end
+ 
